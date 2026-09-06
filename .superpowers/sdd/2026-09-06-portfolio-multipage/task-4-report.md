@@ -52,3 +52,28 @@ git diff --check
 ```
 
 Output: one match was returned for each interest label; `git diff --check` returned exit code 0 (only CRLF advisory warnings).
+
+## Review wording correction
+
+- Replaced the AI-tools draft-card wording with project-grounded copy: `现有项目涉及 Agent、知识库和自动化工作流，我关注如何把复杂信息变成可调用的工具。`
+- Updated the interest-page meta description to say it is a replaceable draft derived from existing projects, not verified personal interests.
+
+### Verification
+
+```powershell
+rg -n "兴趣方向草稿|不作为已验证的个人兴趣|现有项目涉及 Agent、知识库和自动化工作流|健身与训练|机器人与智能硬件|AI 工具与产品|知识整理" interests.html
+```
+
+Output:
+
+```text
+6: meta description includes “兴趣方向草稿” and “不作为已验证的个人兴趣”
+32, 39, 44: “兴趣方向草稿” is present in the page introduction and section structure
+45: 健身与训练
+46: 机器人与智能硬件
+47: AI 工具与产品 — “现有项目涉及 Agent、知识库和自动化工作流，我关注如何把复杂信息变成可调用的工具。”
+48: 知识整理
+Interest content and HTML structure: PASS
+```
+
+`git diff --check` also completed with exit code 0 (only CRLF advisory warnings).
