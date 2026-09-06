@@ -89,3 +89,21 @@ Responsive output summary:
 2. No `.details-toggle` exists. Native `summary` elements are fully styled and keyboard-accessible; the provisioned class is ready if a dedicated disclosure control is later introduced.
 3. No `.interest-card` or `.interest-status` markup exists. The existing interests-page capability cards receive the requested paper/ink, orange index, and signal-green pill treatment through page-context selectors; the semantic classes remain available for later markup refinement.
 
+## Follow-up fix — interest-card breakpoint precedence
+
+The 820px responsive block now explicitly sets both `.interest-grid` and the current `body[data-page="interests"] .capability-grid` implementation to `repeat(2, minmax(0, 1fr))`. This rule follows the generic one-column `.capability-grid` breakpoint rule, so interest cards retain two columns at 820px. The 620px block explicitly sets the same selectors to one column.
+
+Verification commands:
+
+```powershell
+rg -n "interest-grid|interests.*capability-grid|page-hero|route-grid|route-card|project-details|skill-matrix|mobile-menu-toggle|focus-visible|prefers-reduced-motion" styles.css
+node -e "... balanced CSS brace check ..."
+git diff --check
+```
+
+Outputs:
+
+- The 820px two-column override is present at lines 1915–1918, after the generic `.capability-grid` one-column rule.
+- The 620px one-column collapse is present at lines 2167–2171.
+- `CSS brace check: PASS`.
+- `git diff --check` completed with no whitespace errors.
