@@ -41,7 +41,7 @@ function setupMobileMenu() {
 
 function setupDetailsLabels() {
   document.querySelectorAll("details[data-open-label]").forEach((details) => {
-    const label = details.querySelector("summary span");
+    const label = details.querySelector(".details-action-label");
     const closedLabel = details.dataset.openLabel;
 
     if (!label || !closedLabel) return;
