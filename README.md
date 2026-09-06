@@ -1,6 +1,6 @@
 # 高志逸个人作品集
 
-将 AI 产品思维与工程交付能力整合呈现的响应式个人网站。项目为纯静态实现，可直接部署到 Nginx、Cloudflare Pages、GitHub Pages 或任意对象存储。
+将 AI 产品思维与工程交付能力整合呈现的响应式个人网站。项目是纯静态多页面站点，每个内容栏目对应独立的 HTML 页面，可直接部署到 Nginx、Cloudflare Pages、GitHub Pages 或任意对象存储。
 
 ## 本地预览
 
@@ -17,10 +17,16 @@ python -m http.server 4173
 ```text
 .
 ├── index.html
+├── education.html
+├── projects.html
+├── internship.html
+├── skills.html
+├── interests.html
 ├── styles.css
 ├── script.js
 ├── scripts
-│   └── optimize_project_images.py
+│   ├── optimize_project_images.py
+│   └── validate_site.py
 └── assets
     ├── profile.jpg
     └── projects
@@ -32,7 +38,9 @@ python -m http.server 4173
 
 ## 部署
 
-将本目录中的文件完整上传到站点根目录即可。Nginx 的站点根目录需指向这个目录，并确保 `index.html` 是默认首页。
+将本目录中的文件完整上传到站点根目录即可。Nginx 的站点根目录需指向这个目录，并确保 `index.html` 是默认首页。Cloudflare Pages、GitHub Pages 等静态托管服务无需额外的构建或运行时配置。
+
+这是静态多页面站点，不需要 SPA fallback，也不需要后端；页面之间通过普通 HTML 链接跳转。
 
 建议上线前确认：
 
