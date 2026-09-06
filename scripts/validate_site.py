@@ -185,6 +185,18 @@ def validate_home_profile_simplification(root):
     return errors
 
 
+def validate_direct_content_pages(root):
+    """Ensure education, project, and internship details are always visible."""
+    errors = []
+    for page in ("education.html", "projects.html", "internship.html"):
+        content = (root / page).read_text(encoding="utf-8")
+        if "<details" in content or "</details>" in content:
+            errors.append(f"{page}: expandable details are not allowed")
+        if re.search(r"查看(?:完整|教育|工作内容)", content):
+            errors.append(f"{page}: remove collapsed-content labels")
+    return errors
+
+
 def main():
     root = Path(__file__).resolve().parent.parent
     failures = []
@@ -211,6 +223,13 @@ def main():
         print("FAIL home profile simplification")
     else:
         print("PASS home profile simplification")
+
+    direct_content_errors = validate_direct_content_pages(root)
+    if direct_content_errors:
+        failures.extend(direct_content_errors)
+        print("FAIL direct content pages")
+    else:
+        print("PASS direct content pages")
 
     for failure in failures:
         print(f"ERROR: {failure}", file=sys.stderr)
