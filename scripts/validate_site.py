@@ -163,6 +163,28 @@ def validate_final_review_fixes(root):
     return errors
 
 
+def validate_home_profile_simplification(root):
+    """Guard the intentionally minimal home profile presentation."""
+    errors = []
+    index = (root / "index.html").read_text(encoding="utf-8")
+    pages = [
+        (root / page).read_text(encoding="utf-8")
+        for page in REQUIRED_PAGES
+    ]
+
+    if any('class="brand-mark">Gzy<' not in page for page in pages):
+        errors.append("all page brand marks must read Gzy")
+    for stale in ('assets/profile.jpg', 'class="availability"', 'class="proof-grid"'):
+        if stale in index:
+            errors.append(f"index.html: remove stale profile element {stale!r}")
+    if "profile-summary-card" not in index:
+        errors.append("index.html: expected a simplified profile-summary-card")
+    if "https://github.com/Ya97779" not in index:
+        errors.append("index.html: expected the GitHub homepage link")
+
+    return errors
+
+
 def main():
     root = Path(__file__).resolve().parent.parent
     failures = []
@@ -182,6 +204,13 @@ def main():
         print("FAIL final review regressions")
     else:
         print("PASS final review regressions")
+
+    profile_errors = validate_home_profile_simplification(root)
+    if profile_errors:
+        failures.extend(profile_errors)
+        print("FAIL home profile simplification")
+    else:
+        print("PASS home profile simplification")
 
     for failure in failures:
         print(f"ERROR: {failure}", file=sys.stderr)

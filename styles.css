@@ -651,6 +651,51 @@ body[data-page="interests"] .page-hero .hero-role::after { content: " / 05"; }
   font-weight: 700;
 }
 
+body[data-page="home"] .profile-grid {
+  grid-template-columns: 1fr;
+}
+
+.profile-summary-card {
+  display: block;
+  min-height: 0;
+}
+
+.profile-summary-card .identity-copy {
+  display: grid;
+  grid-template-columns: minmax(130px, 0.44fr) minmax(0, 1.56fr);
+  gap: 28px clamp(28px, 5vw, 90px);
+  padding: clamp(36px, 6vw, 82px);
+}
+
+.profile-summary-card .identity-copy .eyebrow,
+.profile-summary-card .identity-copy h3,
+.profile-summary-card .identity-copy > p:not(.eyebrow),
+.profile-summary-card .identity-copy .identity-links {
+  grid-column: 2;
+}
+
+.profile-summary-card .identity-copy .eyebrow {
+  grid-column: 1;
+  grid-row: 1;
+  align-self: start;
+  margin: 0;
+}
+
+.profile-summary-card .identity-copy h3 {
+  grid-row: 1;
+  margin: 0;
+  font-size: clamp(38px, 5.2vw, 76px);
+}
+
+.profile-summary-card .identity-copy > p:not(.eyebrow) {
+  max-width: 720px;
+  margin: 0;
+}
+
+.profile-summary-card .identity-links {
+  margin-top: 4px;
+}
+
 .proof-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -2048,6 +2093,23 @@ summary:focus-visible,
   .identity-card {
     grid-template-columns: 1fr;
     min-height: auto;
+  }
+
+  .profile-summary-card .identity-copy {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  .profile-summary-card .identity-copy .eyebrow,
+  .profile-summary-card .identity-copy h3,
+  .profile-summary-card .identity-copy > p:not(.eyebrow),
+  .profile-summary-card .identity-copy .identity-links {
+    grid-column: auto;
+    grid-row: auto;
+  }
+
+  .profile-summary-card .identity-copy h3 {
+    margin: 0;
   }
 
   .portrait-wrap {
