@@ -13,30 +13,32 @@
     <link rel="stylesheet" href="styles.css" />
     <script src="script.js" defer></script>
   </head>
-  <body>
+  <body data-page="home">
     <a class="skip-link" href="#main">跳到主要内容</a>
 
     <header class="site-header" aria-label="主导航">
-      <a class="brand" href="#top" aria-label="返回首页">
+      <a class="brand" href="index.html" aria-label="返回首页">
         <span class="brand-mark">GZ</span>
         <span>高志逸</span>
       </a>
 
       <nav class="nav-links" aria-label="页面导航">
-        <a href="#profile">关于</a>
-        <a href="#journey">经历</a>
-        <a href="#projects">项目</a>
-        <a href="#capabilities">能力</a>
+        <a href="index.html">首页</a>
+        <a href="education.html">教育经历</a>
+        <a href="projects.html">项目经历</a>
+        <a href="internship.html">实习经历</a>
+        <a href="skills.html">专业能力</a>
+        <a href="interests.html">兴趣爱好</a>
       </nav>
 
-      <a class="header-cta" href="mailto:1402375281@qq.com">
+      <a class="header-cta" href="mailto:1402375281@qq.com" aria-label="联系我">
         联系我
         <span aria-hidden="true">↗</span>
       </a>
     </header>
 
     <main id="main">
-      <section class="hero" id="top" aria-labelledby="hero-title">
+      <section class="hero page-hero" id="home-hero" aria-labelledby="hero-title">
         <div class="hero-atmosphere" aria-hidden="true"></div>
         <div class="eyebrow hero-meta">
           <span>[2026]</span>
@@ -486,7 +488,7 @@
         <footer>
           <span>高志逸 · AI BUILDER</span>
           <span>南开大学 · 人工智能</span>
-          <a href="#top">回到顶部 ↑</a>
+          <a href="#home-hero">回到顶部 ↑</a>
         </footer>
       </section>
     </main>

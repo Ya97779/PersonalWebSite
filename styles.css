@@ -160,6 +160,36 @@ button {
     linear-gradient(135deg, #0b0d0f 20%, #0f1012 63%, #090b0e);
 }
 
+.page-hero {
+  min-height: 48svh;
+  padding: 140px var(--side-pad) 72px;
+  color: var(--white);
+  background: linear-gradient(135deg, #101214 0%, #0b0d0f 100%);
+}
+
+.page-hero .hero-content {
+  width: min(100%, calc(var(--max-width) - (var(--side-pad) * 2)));
+  margin: 0 auto;
+  padding-top: 0;
+}
+
+.page-hero .hero-role {
+  margin-left: 0;
+}
+
+.page-hero h1 {
+  margin: 0;
+  font-size: clamp(56px, 9vw, 120px);
+  font-weight: 760;
+  letter-spacing: -0.07em;
+  line-height: 0.9;
+}
+
+.page-hero .hero-intro {
+  max-width: 620px;
+  margin: 28px 0 0;
+}
+
 .hero::before {
   position: absolute;
   z-index: -1;
