@@ -138,6 +138,31 @@ def validate_page(root, page, expected_body_page):
     return errors
 
 
+def validate_final_review_fixes(root):
+    """Guard the focused layout, contrast, and keyboard-review regressions."""
+    errors = []
+    projects = (root / "projects.html").read_text(encoding="utf-8")
+    styles = (root / "styles.css").read_text(encoding="utf-8")
+    script = (root / "script.js").read_text(encoding="utf-8")
+
+    if projects.count('class="project-preview"') != 2:
+        errors.append("projects.html: expected two constrained project-preview wrappers")
+    if styles.count(".project-preview") < 2:
+        errors.append("styles.css: project previews need a dedicated constrained style")
+    if "position: static;" not in styles or "width: fit-content;" not in styles:
+        errors.append("styles.css: metric pills must remain in normal flow at their content width")
+    if ".contact-section {\n  --contact-ink:" not in styles:
+        errors.append("styles.css: contact surface needs an explicit accessible ink color")
+    if ".contact-section :focus-visible" not in styles:
+        errors.append("styles.css: contact controls need a contrasting focus treatment")
+    if ".footer-nav" not in styles or projects.count('class="footer-nav"') != 1:
+        errors.append("footer navigation needs a dedicated wrapping layout hook")
+    if 'closeMenu({ restoreFocus: true })' not in script:
+        errors.append("script.js: Escape must restore focus to the mobile menu toggle")
+
+    return errors
+
+
 def main():
     root = Path(__file__).resolve().parent.parent
     failures = []
@@ -150,6 +175,13 @@ def main():
         else:
             passed += 1
             print(f"PASS {page}")
+
+    review_errors = validate_final_review_fixes(root)
+    if review_errors:
+        failures.extend(review_errors)
+        print("FAIL final review regressions")
+    else:
+        print("PASS final review regressions")
 
     for failure in failures:
         print(f"ERROR: {failure}", file=sys.stderr)

@@ -23,9 +23,11 @@ function setupMobileMenu() {
 
   if (!toggle || !nav) return;
 
-  const closeMenu = () => {
+  const closeMenu = ({ restoreFocus = false } = {}) => {
+    const wasOpen = nav.classList.contains("is-open");
     nav.classList.remove("is-open");
     toggle.setAttribute("aria-expanded", "false");
+    if (restoreFocus && wasOpen) toggle.focus();
   };
 
   toggle.addEventListener("click", () => {
@@ -33,9 +35,11 @@ function setupMobileMenu() {
     toggle.setAttribute("aria-expanded", String(isOpen));
   });
 
-  nav.querySelectorAll("a").forEach((link) => link.addEventListener("click", closeMenu));
+  nav.querySelectorAll("a").forEach((link) => link.addEventListener("click", () => closeMenu()));
   document.addEventListener("keydown", (event) => {
-    if (event.key === "Escape") closeMenu();
+    if (event.key === "Escape" && nav.classList.contains("is-open")) {
+      closeMenu({ restoreFocus: true });
+    }
   });
 }
 
