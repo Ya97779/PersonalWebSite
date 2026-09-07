@@ -1,12 +1,12 @@
 :root {
-  --ink: #0b0d0f;
-  --ink-soft: #15191c;
-  --paper: #f1eee6;
-  --paper-deep: #dedad0;
-  --white: #fbfaf6;
-  --muted: #858b8f;
-  --accent: #ff5a36;
-  --signal: #bdeec7;
+  --ink: #1d1d1f;
+  --ink-soft: #f5f5f7;
+  --paper: #f5f5f7;
+  --paper-deep: #ffffff;
+  --white: #ffffff;
+  --muted: #6e6e73;
+  --accent: #0071e3;
+  --signal: #e8f3ff;
   --max-width: 1480px;
   --side-pad: clamp(22px, 4vw, 64px);
   --radius: 24px;
@@ -2347,5 +2347,625 @@ summary:focus-visible,
   .reveal {
     opacity: 1;
     transform: none;
+  }
+}
+
+/* Apple-inspired light system: quiet surfaces, generous space, focused blue actions. */
+:root {
+  --apple-line: #d2d2d7;
+  --apple-copy: #6e6e73;
+  --apple-blue-soft: #eaf4ff;
+  --apple-shadow: 0 18px 42px rgba(0, 0, 0, 0.07);
+}
+
+body {
+  color: var(--ink);
+  background: #ffffff;
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", "PingFang SC", "Microsoft YaHei", Arial, sans-serif;
+}
+
+::selection {
+  color: #ffffff;
+  background: var(--accent);
+}
+
+.site-header {
+  color: var(--ink);
+  border-bottom-color: rgba(29, 29, 31, 0.12);
+  background: rgba(255, 255, 255, 0.84);
+  box-shadow: 0 1px 0 rgba(29, 29, 31, 0.03);
+  backdrop-filter: saturate(180%) blur(20px);
+}
+
+.brand-mark {
+  color: #ffffff;
+  background: var(--ink);
+  border-radius: 50%;
+}
+
+.nav-links {
+  color: var(--muted);
+}
+
+.nav-links a:hover,
+.nav-links a:focus-visible,
+.identity-links a:hover,
+.identity-links a:focus-visible {
+  color: var(--accent);
+}
+
+body[data-page="home"] .nav-links [data-page-link="home"],
+body[data-page="education"] .nav-links [data-page-link="education"],
+body[data-page="projects"] .nav-links [data-page-link="projects"],
+body[data-page="internship"] .nav-links [data-page-link="internship"],
+body[data-page="skills"] .nav-links [data-page-link="skills"],
+body[data-page="interests"] .nav-links [data-page-link="interests"] {
+  color: var(--ink);
+}
+
+.header-cta {
+  border-color: var(--apple-line);
+  background: rgba(255, 255, 255, 0.72);
+}
+
+.header-cta:hover,
+.header-cta:focus-visible {
+  color: #ffffff;
+  background: var(--ink);
+}
+
+.mobile-menu-toggle {
+  color: var(--ink);
+  border-color: var(--apple-line);
+  background: rgba(255, 255, 255, 0.72);
+}
+
+.hero,
+.page-hero:not(.hero) {
+  color: var(--ink);
+  background:
+    radial-gradient(circle at 82% 18%, rgba(0, 113, 227, 0.09), transparent 27%),
+    linear-gradient(180deg, #ffffff 0%, #f5f5f7 74%, #ffffff 100%);
+}
+
+.hero::before {
+  opacity: 0.045;
+  background-image: radial-gradient(rgba(29, 29, 31, 0.5) 0.45px, transparent 0.6px);
+}
+
+.hero::after {
+  border-color: rgba(0, 113, 227, 0.1);
+  box-shadow: 0 0 160px rgba(0, 113, 227, 0.08) inset;
+}
+
+.page-hero:not(.hero)::after {
+  border-color: rgba(0, 113, 227, 0.13);
+}
+
+.hero-atmosphere {
+  background: radial-gradient(circle, rgba(0, 113, 227, 0.12), transparent 67%);
+}
+
+.hero-meta,
+.hero-role,
+.hero-side,
+.scroll-cue {
+  color: var(--apple-copy);
+}
+
+.hero-side-left strong,
+.hero-side-right > span,
+.section-index,
+.eyebrow,
+.timeline-type,
+.project-meta span:last-child {
+  color: var(--accent);
+}
+
+.hero-side-right strong,
+.hero h1,
+.page-hero:not(.hero) h1 {
+  color: var(--ink);
+}
+
+.hero-intro,
+.page-hero:not(.hero) .hero-intro {
+  color: var(--apple-copy);
+}
+
+.hero-side-right p {
+  color: var(--apple-copy);
+}
+
+.button-primary {
+  color: #ffffff;
+  background: var(--accent);
+  box-shadow: 0 8px 18px rgba(0, 113, 227, 0.18);
+}
+
+.button-primary:hover,
+.button-primary:focus-visible {
+  color: #ffffff;
+  background: #0066cc;
+}
+
+.button-ghost {
+  color: var(--ink);
+  border-color: var(--apple-line);
+  background: rgba(255, 255, 255, 0.6);
+}
+
+.button-ghost:hover,
+.button-ghost:focus-visible {
+  color: var(--ink);
+  border-color: var(--ink);
+  background: #ffffff;
+}
+
+.page-content,
+.profile-section,
+.journey-section {
+  background: #ffffff;
+}
+
+.routes-section {
+  background: var(--paper);
+}
+
+.section-heading > p,
+.identity-copy > p:not(.eyebrow),
+.journey-group-heading > p,
+.timeline-item > div:nth-child(2) > p:last-child,
+.timeline-description > p,
+.proof-card p,
+.route-card span {
+  color: var(--apple-copy);
+}
+
+.profile-summary-card {
+  color: var(--ink);
+  border: 1px solid var(--apple-line);
+  background: #ffffff;
+  box-shadow: var(--apple-shadow);
+}
+
+.profile-summary-card .identity-copy .eyebrow {
+  color: var(--accent);
+}
+
+.identity-links a {
+  color: var(--accent);
+}
+
+.proof-card {
+  border-color: var(--apple-line);
+  background: #ffffff;
+}
+
+.proof-card > span,
+.proof-card strong {
+  color: var(--ink);
+}
+
+.accent-card {
+  color: var(--ink);
+  border-color: #cfe5ff;
+  background: var(--apple-blue-soft);
+}
+
+.accent-card p {
+  color: var(--apple-copy);
+}
+
+.outline-card {
+  color: var(--ink);
+  border-color: var(--apple-line);
+  background: var(--paper);
+}
+
+.outline-card p {
+  color: var(--apple-copy);
+}
+
+.route-card {
+  border-color: var(--apple-line);
+  background: #ffffff;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.035);
+}
+
+.route-card:hover,
+.route-card:focus-visible,
+.route-card[aria-current="page"] {
+  border-color: rgba(0, 113, 227, 0.45);
+  box-shadow: 0 18px 34px rgba(0, 113, 227, 0.1);
+}
+
+.route-card::before {
+  background: var(--accent);
+}
+
+.projects-content,
+.skills-content {
+  color: var(--ink);
+  background: var(--paper);
+}
+
+.projects-content .section-heading > p,
+.skills-content .section-heading > p,
+.projects-content .section-name,
+.skills-content .section-name {
+  color: var(--apple-copy);
+}
+
+.project-card {
+  border-color: var(--apple-line);
+  background: #ffffff;
+  box-shadow: var(--apple-shadow);
+}
+
+.project-details,
+.timeline-details-panel,
+.project-full-content,
+.project-gallery,
+.robot-shot,
+.wiki-flow {
+  border-color: var(--apple-line);
+}
+
+.project-details > summary,
+.timeline-details-panel > summary,
+.details-toggle {
+  color: var(--ink);
+}
+
+.project-details[open],
+.timeline-details-panel[open] {
+  background: var(--paper);
+}
+
+.project-details[open] > summary,
+.timeline-details-panel[open] > summary {
+  border-bottom-color: var(--apple-line);
+}
+
+.details-icon {
+  color: var(--accent);
+}
+
+.project-copy > p,
+.project-copy > .project-points,
+.project-points {
+  color: #424245;
+}
+
+.project-points strong {
+  color: var(--ink);
+}
+
+.tag-list span {
+  color: var(--apple-copy);
+  border-color: var(--apple-line);
+  background: rgba(255, 255, 255, 0.72);
+}
+
+.project-copy > .metric-pill,
+.metric-pill {
+  color: #ffffff;
+  background: var(--accent);
+  box-shadow: 0 8px 18px rgba(0, 113, 227, 0.16);
+}
+
+.project-visual {
+  background: var(--paper);
+}
+
+.agent-visual {
+  background:
+    linear-gradient(rgba(29, 29, 31, 0.055) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(29, 29, 31, 0.055) 1px, transparent 1px),
+    radial-gradient(circle at 50% 52%, rgba(0, 113, 227, 0.16), transparent 30%),
+    #f5f5f7;
+}
+
+.agent-visual svg {
+  stroke: rgba(29, 29, 31, 0.18);
+}
+
+.agent-core,
+.agent-node {
+  color: var(--ink);
+  border-color: var(--apple-line);
+  background: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 16px 42px rgba(0, 0, 0, 0.1);
+}
+
+.agent-core {
+  border-color: var(--accent);
+}
+
+.agent-core span {
+  color: var(--apple-copy);
+}
+
+.agent-core strong {
+  color: var(--ink);
+}
+
+.agent-node {
+  color: var(--ink);
+}
+
+.node-expert {
+  color: #ffffff;
+  border-color: var(--accent);
+  background: var(--accent);
+}
+
+.project-gallery,
+.project-preview,
+.robot-shot {
+  background: var(--paper);
+}
+
+.project-shot {
+  border-color: var(--apple-line);
+  background: #ffffff;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+}
+
+.project-shot figcaption,
+.robot-shot figcaption {
+  color: var(--ink);
+}
+
+.project-shot figcaption span,
+.robot-shot figcaption span {
+  color: var(--accent);
+}
+
+.project-fact-panel {
+  color: var(--ink);
+  background: #ffffff;
+}
+
+.project-fact-panel li {
+  border-color: var(--apple-line);
+}
+
+.project-fact-panel li:first-child {
+  border-color: var(--apple-line);
+}
+
+.project-fact-panel b {
+  color: var(--accent);
+}
+
+.project-metrics {
+  border-color: var(--apple-line);
+  background: var(--paper);
+}
+
+.project-metrics div {
+  border-color: var(--apple-line);
+}
+
+.project-metrics strong {
+  color: var(--ink);
+}
+
+.project-metrics span {
+  color: var(--apple-copy);
+}
+
+.wiki-visual {
+  background:
+    radial-gradient(circle at 80% 20%, rgba(0, 113, 227, 0.12), transparent 30%),
+    #f5f5f7;
+}
+
+.wiki-visual .visual-label,
+.wiki-status {
+  color: var(--accent);
+}
+
+.wiki-stack span {
+  color: var(--ink);
+  border-color: var(--apple-line);
+  background: rgba(255, 255, 255, 0.86);
+  box-shadow: 0 16px 35px rgba(0, 0, 0, 0.09);
+}
+
+.wiki-stack span:nth-child(3) {
+  color: #ffffff;
+  border-color: var(--ink);
+  background: var(--ink);
+}
+
+.wiki-flow article {
+  border-color: var(--apple-line);
+}
+
+.wiki-flow article > span {
+  color: var(--accent);
+}
+
+.wiki-flow strong {
+  color: var(--ink);
+}
+
+.wiki-flow p {
+  color: var(--apple-copy);
+}
+
+.timeline {
+  border-color: var(--apple-line);
+}
+
+.timeline-item {
+  border-color: var(--apple-line);
+}
+
+.timeline-details {
+  color: #424245;
+}
+
+.timeline-details strong {
+  color: var(--ink);
+}
+
+.timeline-description .timeline-result {
+  color: var(--ink);
+  border-left-color: var(--accent);
+  background: var(--apple-blue-soft);
+}
+
+.timeline-details-panel {
+  border-color: var(--apple-line);
+}
+
+.timeline-details-panel[open] > summary {
+  border-color: var(--apple-line);
+}
+
+.capabilities-section {
+  color: var(--ink);
+  background: #ffffff;
+}
+
+.capabilities-section .section-heading > p {
+  color: var(--apple-copy);
+}
+
+.capability-grid,
+.skill-matrix-grid {
+  border-color: var(--apple-line);
+}
+
+.capability-grid article {
+  color: var(--ink);
+  border-color: var(--apple-line);
+  background: #ffffff;
+}
+
+.capability-grid article:hover {
+  color: var(--ink);
+  background: var(--apple-blue-soft);
+}
+
+.capability-number {
+  color: var(--apple-copy);
+}
+
+.capability-grid .eyebrow,
+.capability-grid article:hover .eyebrow,
+.capability-grid article:hover .capability-number {
+  color: var(--accent);
+}
+
+.capability-grid article > p:not(.eyebrow),
+.capability-grid article:hover > p:not(.eyebrow) {
+  color: var(--apple-copy);
+}
+
+.skill-matrix {
+  border-color: var(--apple-line);
+}
+
+.skill-matrix-grid [data-skill-group] {
+  border-color: var(--apple-line);
+  background: #ffffff;
+}
+
+.skill-matrix-grid .tag-list span {
+  color: var(--apple-copy);
+  border-color: var(--apple-line);
+  background: var(--paper);
+}
+
+.interest-card,
+body[data-page="interests"] .capability-grid article {
+  border-color: var(--apple-line);
+  background: #ffffff;
+}
+
+.interest-card .capability-number,
+body[data-page="interests"] .capability-number,
+.interest-card .eyebrow,
+body[data-page="interests"] .capability-grid .eyebrow,
+body[data-page="interests"] .capability-grid article:hover .eyebrow {
+  color: var(--accent);
+}
+
+.interest-card > p:not(.eyebrow),
+body[data-page="interests"] .capability-grid article > p:not(.eyebrow),
+body[data-page="interests"] .capability-grid article:hover > p:not(.eyebrow) {
+  color: var(--apple-copy);
+}
+
+.interest-status,
+.interest-card .tag-list span,
+body[data-page="interests"] .capability-grid .tag-list span,
+body[data-page="interests"] .capability-grid article:hover .tag-list span {
+  color: #005bb5;
+  background: var(--apple-blue-soft);
+}
+
+.contact-section {
+  --contact-ink: #ffffff;
+  color: #ffffff;
+  background: var(--ink);
+}
+
+.contact-section > .eyebrow,
+.contact-section > p {
+  color: #a1a1a6;
+}
+
+.contact-section h2 {
+  color: #ffffff;
+}
+
+.button-light {
+  color: #ffffff;
+  background: var(--accent);
+  box-shadow: 0 8px 18px rgba(0, 113, 227, 0.18);
+}
+
+.button-light:hover,
+.button-light:focus-visible {
+  color: #ffffff;
+  background: #0066cc;
+}
+
+.contact-email {
+  color: #ffffff;
+  border-color: rgba(255, 255, 255, 0.5);
+}
+
+.contact-email:hover,
+.contact-email:focus-visible {
+  color: #ffffff;
+  border-color: #ffffff;
+}
+
+.contact-section footer {
+  border-color: rgba(255, 255, 255, 0.24);
+}
+
+:focus-visible {
+  outline-color: var(--accent);
+}
+
+@media (max-width: 820px) {
+  .nav-links.is-open {
+    border-color: var(--apple-line);
+    background: rgba(255, 255, 255, 0.97);
+    box-shadow: 0 18px 45px rgba(0, 0, 0, 0.12);
+  }
+
+  .nav-links.is-open a:hover,
+  .nav-links.is-open a:focus-visible {
+    color: var(--ink);
+    background: var(--paper);
   }
 }
