@@ -145,10 +145,15 @@ def validate_final_review_fixes(root):
     styles = (root / "styles.css").read_text(encoding="utf-8")
     script = (root / "script.js").read_text(encoding="utf-8")
 
-    if projects.count('class="project-preview"') != 2:
-        errors.append("projects.html: expected two constrained project-preview wrappers")
-    if styles.count(".project-preview") < 2:
-        errors.append("styles.css: project previews need a dedicated constrained style")
+    required_project_media = (
+        'class="project-gallery phone-gallery fitness-gallery"',
+        'class="project-gallery phone-gallery ios-gallery"',
+        "assets/projects/robot-01.webp",
+        "assets/projects/llm-wiki-workspace.jpg",
+    )
+    for marker in required_project_media:
+        if marker not in projects:
+            errors.append(f"projects.html: missing current project media marker {marker!r}")
     if "position: static;" not in styles or "width: fit-content;" not in styles:
         errors.append("styles.css: metric pills must remain in normal flow at their content width")
     if ".contact-section {\n  --contact-ink:" not in styles:
@@ -172,8 +177,9 @@ def validate_home_profile_simplification(root):
         for page in REQUIRED_PAGES
     ]
 
-    if any('class="brand-mark">Gzy<' not in page for page in pages):
-        errors.append("all page brand marks must read Gzy")
+    brand_pattern = re.compile(r'<a\s+class="brand"[^>]*>\s*高志逸\s*</a>', re.S)
+    if any(not brand_pattern.search(page) for page in pages):
+        errors.append("all page brand links must display 高志逸")
     for stale in ('assets/profile.jpg', 'class="availability"', 'class="proof-grid"'):
         if stale in index:
             errors.append(f"index.html: remove stale profile element {stale!r}")
@@ -181,6 +187,10 @@ def validate_home_profile_simplification(root):
         errors.append("index.html: expected a simplified profile-summary-card")
     if "https://github.com/Ya97779" not in index:
         errors.append("index.html: expected the GitHub homepage link")
+    if "https://blog.csdn.net/m0_61819121?type=blog" not in index:
+        errors.append("index.html: expected the CSDN homepage link")
+    if "理解问题、设计方案、落地实现" not in index:
+        errors.append("index.html: professional skills route copy is out of date")
 
     return errors
 

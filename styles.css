@@ -13,6 +13,10 @@
   --control-bar-height: 72px;
 }
 
+@view-transition {
+  navigation: auto;
+}
+
 * {
   box-sizing: border-box;
 }
@@ -30,6 +34,19 @@ body {
   line-height: 1.7;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
+}
+
+.scroll-progress {
+  position: fixed;
+  z-index: 60;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: var(--accent);
+  pointer-events: none;
+  transform: scaleX(0);
+  transform-origin: left center;
 }
 
 body::selection {
@@ -151,6 +168,22 @@ body[data-page="interests"] .nav-links [data-page-link="interests"]::after {
   border-radius: 10px;
   font-size: 13px;
   font-weight: 650;
+}
+
+.header-social-links {
+  display: flex;
+  align-items: center;
+  justify-self: end;
+  gap: 8px;
+}
+
+.header-social-links .header-cta {
+  justify-self: initial;
+}
+
+.header-cta-secondary {
+  color: var(--accent);
+  border-color: rgba(255, 90, 54, 0.48);
 }
 
 .header-cta:hover,
@@ -830,6 +863,7 @@ body[data-page="home"] .profile-grid {
   border: 1px solid rgba(255, 255, 255, 0.14);
   border-radius: var(--radius);
   background: var(--ink-soft);
+  transition: border-color 260ms ease, box-shadow 260ms ease;
 }
 
 .project-details,
@@ -1263,6 +1297,23 @@ body[data-page="home"] .profile-grid {
   height: 100%;
   object-fit: cover;
   object-position: center;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .project-card:hover {
+    border-color: rgba(255, 90, 54, 0.42);
+    box-shadow: 0 24px 64px rgba(0, 0, 0, 0.24);
+  }
+
+  .project-shot img,
+  .wiki-visual img {
+    transition: transform 700ms cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+
+  .project-shot:hover img,
+  .wiki-visual:hover img {
+    transform: scale(1.025);
+  }
 }
 
 .wiki-flow {
@@ -1796,15 +1847,81 @@ summary:focus-visible,
   outline-color: var(--contact-ink);
 }
 
-.reveal {
-  opacity: 0;
-  transform: translateY(28px);
-  transition: opacity 700ms cubic-bezier(0.2, 0.8, 0.2, 1), transform 700ms cubic-bezier(0.2, 0.8, 0.2, 1);
+@keyframes page-exit {
+  to {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
 }
 
-.reveal.is-visible {
+@keyframes page-enter {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+}
+
+@keyframes hero-enter {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+}
+
+.reveal {
   opacity: 1;
   transform: translateY(0);
+}
+
+.motion-ready .reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 680ms cubic-bezier(0.2, 0.8, 0.2, 1), transform 680ms cubic-bezier(0.2, 0.8, 0.2, 1);
+  transition-delay: var(--reveal-delay, 0ms);
+}
+
+.motion-ready .reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.motion-ready .route-card.reveal.is-visible:hover,
+.motion-ready .route-card.reveal.is-visible:focus-visible {
+  transform: translateY(-3px);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  ::view-transition-old(root) {
+    animation: page-exit 180ms ease both;
+  }
+
+  ::view-transition-new(root) {
+    animation: page-enter 360ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+  }
+
+  body:not([data-page="interests"]) .page-hero .hero-role,
+  body:not([data-page="interests"]) .page-hero h1,
+  body:not([data-page="interests"]) .page-hero .hero-intro,
+  body:not([data-page="interests"]) .page-hero .hero-actions,
+  body:not([data-page="interests"]) .hero-side {
+    animation: hero-enter 680ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+  }
+
+  body:not([data-page="interests"]) .page-hero h1 {
+    animation-delay: 80ms;
+  }
+
+  body:not([data-page="interests"]) .page-hero .hero-intro {
+    animation-delay: 180ms;
+  }
+
+  body:not([data-page="interests"]) .page-hero .hero-actions {
+    animation-delay: 280ms;
+  }
+
+  body:not([data-page="interests"]) .hero-side {
+    animation-delay: 340ms;
+  }
 }
 
 @media (max-width: 1080px) {
@@ -2029,6 +2146,16 @@ summary:focus-visible,
   .header-cta {
     padding: 11px 14px;
     font-size: 12px;
+  }
+
+  .header-social-links {
+    gap: 6px;
+  }
+
+  .header-social-links .header-cta {
+    gap: 6px;
+    padding: 10px 9px;
+    font-size: 10px;
   }
 
   .hero {
@@ -2339,6 +2466,11 @@ summary:focus-visible,
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
+  }
+
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation: none !important;
   }
 
   *,

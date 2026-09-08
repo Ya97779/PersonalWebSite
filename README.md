@@ -1,6 +1,8 @@
 # 高志逸个人作品集
 
-将 AI 产品思维与工程交付能力整合呈现的响应式个人网站。项目是纯静态多页面站点，每个内容栏目对应独立的 HTML 页面，可直接部署到 Nginx、Cloudflare Pages、GitHub Pages 或任意对象存储。
+将 AI 产品思维与工程交付能力整合呈现的响应式个人网站。项目是纯静态多页面站点，教育、项目、实习、专业能力与兴趣爱好均有独立页面，可直接部署到 Nginx、Cloudflare Pages、GitHub Pages 或任意对象存储。
+
+当前版本包含响应式导航、页面进入与滚动显现动效、顶部阅读进度、键盘焦点样式和“减少动态效果”系统偏好适配。项目页直接展示健身助手、智能穿戴健康 iOS App、移动机器人与 LLM-Wiki 的完整内容及现有图片。
 
 ## 本地预览
 
@@ -28,13 +30,25 @@ python -m http.server 4173
 │   ├── optimize_project_images.py
 │   └── validate_site.py
 └── assets
-    ├── profile.jpg
+    ├── favicon.svg
     └── projects
         ├── fitness-01.webp ... fitness-05.webp
-        ├── ios-01.webp ... ios-03.webp
+        ├── ios01.png ... ios03.png
         ├── robot-01.webp
+        ├── llm-wiki-workspace.jpg
         └── README.md
 ```
+
+## 检查
+
+修改后可运行：
+
+```bash
+python scripts/validate_site.py
+node --check script.js
+```
+
+`validate_site.py` 会检查页面结构、站内链接与资源、当前品牌文字、项目图片、首页关键链接和专业能力导航文案。
 
 ## 部署
 

@@ -59,14 +59,57 @@ function setupDetailsLabels() {
   });
 }
 
+function prepareRevealItems() {
+  if (document.body.dataset.page === "interests") return;
+
+  const standaloneSelectors = [
+    ".section-heading",
+    ".profile-grid",
+    ".robot-shot",
+    ".contact-section > .eyebrow",
+    ".contact-section > h2",
+    ".contact-actions",
+    ".contact-email",
+  ];
+
+  document.querySelectorAll(standaloneSelectors.join(",")).forEach((item) => {
+    item.classList.add("reveal");
+  });
+
+  const staggeredGroups = [
+    ".route-grid",
+    ".projects-list",
+    ".project-gallery",
+    ".timeline",
+    ".capability-grid",
+    ".skill-matrix-grid",
+    ".wiki-flow",
+  ];
+
+  staggeredGroups.forEach((selector) => {
+    document.querySelectorAll(selector).forEach((group) => {
+      group.classList.remove("reveal", "is-visible");
+
+      Array.from(group.children).forEach((item, index) => {
+        item.classList.add("reveal");
+        item.style.setProperty("--reveal-delay", `${Math.min(index, 5) * 65}ms`);
+      });
+    });
+  });
+}
+
 function setupRevealAnimations() {
   const revealItems = document.querySelectorAll(".reveal");
   const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  if (!revealItems.length) return;
 
   if (reducedMotion || !("IntersectionObserver" in window)) {
     revealItems.forEach((item) => item.classList.add("is-visible"));
     return;
   }
+
+  document.documentElement.classList.add("motion-ready");
 
   const observer = new IntersectionObserver(
     (entries) => {
@@ -80,6 +123,33 @@ function setupRevealAnimations() {
   );
 
   revealItems.forEach((item) => observer.observe(item));
+}
+
+function setupScrollProgress() {
+  if (document.body.dataset.page === "interests") return;
+
+  const progressBar = document.createElement("div");
+  progressBar.className = "scroll-progress";
+  progressBar.setAttribute("aria-hidden", "true");
+  document.body.append(progressBar);
+
+  let animationFrame = 0;
+
+  const updateProgress = () => {
+    const scrollRange = document.documentElement.scrollHeight - window.innerHeight;
+    const progress = scrollRange > 0 ? window.scrollY / scrollRange : 0;
+    progressBar.style.transform = `scaleX(${Math.min(1, Math.max(0, progress))})`;
+    animationFrame = 0;
+  };
+
+  const requestUpdate = () => {
+    if (animationFrame) return;
+    animationFrame = window.requestAnimationFrame(updateProgress);
+  };
+
+  updateProgress();
+  window.addEventListener("scroll", requestUpdate, { passive: true });
+  window.addEventListener("resize", requestUpdate);
 }
 
 function setupHeroAtmosphere() {
@@ -101,5 +171,7 @@ function setupHeroAtmosphere() {
 setActivePage();
 setupMobileMenu();
 setupDetailsLabels();
+prepareRevealItems();
 setupRevealAnimations();
+setupScrollProgress();
 setupHeroAtmosphere();
