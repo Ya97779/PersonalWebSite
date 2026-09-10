@@ -1148,6 +1148,13 @@ body[data-page="home"] .profile-grid {
   padding-block: clamp(28px, 5vw, 66px);
 }
 
+.ios-gallery .project-shot img {
+  height: auto;
+  aspect-ratio: 941 / 1672;
+  object-fit: contain;
+  object-position: center;
+}
+
 .project-shot {
   overflow: hidden;
   margin: 0;
