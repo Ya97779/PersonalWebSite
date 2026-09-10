@@ -149,7 +149,7 @@ def validate_final_review_fixes(root):
         'class="project-gallery phone-gallery fitness-gallery"',
         'class="project-gallery phone-gallery ios-gallery"',
         "assets/projects/robot-01.webp",
-        "assets/projects/llm-wiki-workspace.jpg",
+        "assets/projects/llm-wiki-workspace.webp",
     )
     for marker in required_project_media:
         if marker not in projects:
@@ -215,10 +215,10 @@ def validate_interests_page(root):
         "<h3>游戏</h3>",
         "<h3>健身</h3>",
         "<h3>AI 与具身智能</h3>",
-        'src="assets/projects/wgame1.png"',
-        'src="assets/projects/wa.png"',
-        'src="assets/projects/yunding.jpg"',
-        'src="assets/projects/mybody.jpg"',
+        'src="assets/projects/wgame1.webp"',
+        'src="assets/projects/wa.webp"',
+        'src="assets/projects/yunding.webp"',
+        'src="assets/projects/mybody.webp"',
     )
     for marker in required_markers:
         if marker not in interests:

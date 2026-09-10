@@ -33,13 +33,13 @@ python -m http.server 4173
     ├── favicon.svg
     └── projects
         ├── fitness-01.webp ... fitness-05.webp
-        ├── ios01.png ... ios03.png
+        ├── ios01.webp ... ios03.webp
         ├── robot-01.webp
-        ├── llm-wiki-workspace.jpg
-        ├── wgame1.png
-        ├── wa.png
-        ├── yunding.jpg
-        ├── mybody.jpg
+        ├── llm-wiki-workspace.webp
+        ├── wgame1.webp
+        ├── wa.webp
+        ├── yunding.webp
+        ├── mybody.webp
         └── README.md
 ```
 
