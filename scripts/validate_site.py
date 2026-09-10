@@ -207,6 +207,27 @@ def validate_direct_content_pages(root):
     return errors
 
 
+def validate_interests_page(root):
+    """Ensure the interests page contains the three confirmed interests and photo."""
+    errors = []
+    interests = (root / "interests.html").read_text(encoding="utf-8")
+    required_markers = (
+        "<h3>游戏</h3>",
+        "<h3>健身</h3>",
+        "<h3>AI 与具身智能</h3>",
+        'src="assets/projects/wgame1.png"',
+        'src="assets/projects/wa.png"',
+        'src="assets/projects/yunding.jpg"',
+        'src="assets/projects/mybody.jpg"',
+    )
+    for marker in required_markers:
+        if marker not in interests:
+            errors.append(f"interests.html: missing confirmed interest marker {marker!r}")
+    if "DRAFT" in interests or "草稿" in interests:
+        errors.append("interests.html: remove stale draft language")
+    return errors
+
+
 def main():
     root = Path(__file__).resolve().parent.parent
     failures = []
@@ -240,6 +261,13 @@ def main():
         print("FAIL direct content pages")
     else:
         print("PASS direct content pages")
+
+    interests_errors = validate_interests_page(root)
+    if interests_errors:
+        failures.extend(interests_errors)
+        print("FAIL interests page")
+    else:
+        print("PASS interests page")
 
     for failure in failures:
         print(f"ERROR: {failure}", file=sys.stderr)

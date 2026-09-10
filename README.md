@@ -36,6 +36,10 @@ python -m http.server 4173
         ├── ios01.png ... ios03.png
         ├── robot-01.webp
         ├── llm-wiki-workspace.jpg
+        ├── wgame1.png
+        ├── wa.png
+        ├── yunding.jpg
+        ├── mybody.jpg
         └── README.md
 ```
 
