@@ -194,14 +194,30 @@ body[data-page="interests"] .nav-links [data-page-link="interests"]::after {
 
 .mobile-menu-toggle {
   display: none;
-  width: 42px;
+  width: auto;
   height: 42px;
-  padding: 0;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  padding: 0 13px;
   border: 1px solid rgba(255, 255, 255, 0.26);
   border-radius: 10px;
   color: var(--white);
   background: transparent;
+  font-size: 12px;
+  font-weight: 650;
+  line-height: 1;
+  white-space: nowrap;
   cursor: pointer;
+}
+
+.mobile-menu-toggle span:last-child {
+  font-size: 15px;
+  transition: transform 180ms ease;
+}
+
+.mobile-menu-toggle[aria-expanded="true"] span:last-child {
+  transform: rotate(45deg);
 }
 
 .hero {
@@ -2149,8 +2165,7 @@ summary:focus-visible,
   }
 
   .mobile-menu-toggle {
-    display: inline-grid;
-    place-items: center;
+    display: inline-flex;
   }
 
   .nav-links.is-open {
