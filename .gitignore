@@ -2,3 +2,5 @@ tmp/
 .DS_Store
 Thumbs.db
 
+# Contains personal/company information; publish only the redacted WebP derivative.
+assets/projects/shibo.jpg

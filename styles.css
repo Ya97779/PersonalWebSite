@@ -1792,6 +1792,11 @@ body[data-page="interests"] .capability-grid article:hover > p:not(.eyebrow) {
   backdrop-filter: blur(8px);
 }
 
+.interest-event-media {
+  width: min(100%, 520px);
+  max-width: 520px;
+}
+
 .interest-game-gallery {
   display: grid;
   grid-template-columns: minmax(0, 2fr) minmax(220px, 1fr);
